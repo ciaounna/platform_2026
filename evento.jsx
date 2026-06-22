@@ -18,12 +18,40 @@ function NotFound() {
   );
 }
 
+function EventoSkeleton() {
+  return (
+    <div>
+      <header className="ev-top">
+        <div className="wrap ev-top__inner">
+          <a className="nav__logo" href="index.html">unna</a>
+        </div>
+      </header>
+      <main className="wrap ev-layout" id="main">
+        <article className="ev-main">
+          <div className="skeleton-pulse skeleton-line skeleton-line--short" style={{marginBottom:"20px",height:"16px"}} />
+          <div className="skeleton-pulse" style={{height:"clamp(2.4rem,6vw,4rem)",borderRadius:"8px",marginBottom:"18px"}} />
+          <div className="skeleton-pulse skeleton-line skeleton-line--med" style={{marginBottom:"28px",height:"16px"}} />
+          <div className="skeleton-pulse" style={{aspectRatio:"16/10",borderRadius:"var(--r-xl)",marginBottom:"32px"}} />
+          <div className="skeleton-pulse skeleton-line" style={{marginBottom:"10px"}} />
+          <div className="skeleton-pulse skeleton-line" style={{marginBottom:"10px"}} />
+          <div className="skeleton-pulse skeleton-line skeleton-line--med" />
+        </article>
+        <aside className="ev-side">
+          <div className="skeleton-pulse" style={{height:"320px",borderRadius:"var(--r-xl)"}} />
+        </aside>
+      </main>
+    </div>
+  );
+}
+
 function EventoPage() {
   const [, refresh] = React.useReducer(x => x + 1, 0);
   React.useEffect(() => {
     window.addEventListener("unna:refresh", refresh);
     return () => window.removeEventListener("unna:refresh", refresh);
   }, []);
+
+  if (UNNA._loading) return <EventoSkeleton />;
 
   const ev = getEvento();
   if (!ev) return <NotFound />;
