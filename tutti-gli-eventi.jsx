@@ -1,4 +1,4 @@
-/* global React, ReactDOM, EventoCard, Icon */
+/* global React, ReactDOM, EventoCard, Icon, SkeletonCard */
 // ============================================================
 // unna — Tutti gli eventi
 // ============================================================
@@ -31,7 +31,10 @@ function TuttiGliEventiPage() {
       </div>
 
       <main className="wrap tge-grid" id="main">
-        {eventi.map((e) => <EventoCard key={e.id} evento={e} />)}
+        {UNNA._loading
+          ? [1,2,3,4].map(i => <SkeletonCard key={i} />)
+          : eventi.map((e) => <EventoCard key={e.id} evento={e} />)
+        }
       </main>
 
       <footer className="ev-foot">

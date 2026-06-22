@@ -106,6 +106,21 @@ function EventoMedia({ evento, className = "", style = {}, label = true }) {
 }
 window.EventoMedia = EventoMedia;
 
+// ---- Skeleton card eventi ------------------------------------
+function SkeletonCard({ featured = false }) {
+  return (
+    <div className={`skeleton-card ${featured ? "skeleton-card--big" : ""}`} aria-hidden="true">
+      <div className="skeleton-card__media skeleton-pulse" />
+      <div className="skeleton-card__body">
+        <div className="skeleton-pulse skeleton-line skeleton-line--short" />
+        <div className="skeleton-pulse skeleton-line" />
+        <div className="skeleton-pulse skeleton-line skeleton-line--med" />
+      </div>
+    </div>
+  );
+}
+window.SkeletonCard = SkeletonCard;
+
 // ---- Icone --------------------------------------------------
 function Icon({ name, size = 22, stroke = 2 }) {
   const common = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: stroke, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true };

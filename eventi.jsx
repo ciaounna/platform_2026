@@ -1,4 +1,4 @@
-/* global React, EventoMedia, Icon, Reveal, tinta */
+/* global React, EventoMedia, Icon, Reveal, tinta, SkeletonCard */
 // ============================================================
 // unna — EVENTI. Card esterne → pagina di dettaglio.
 // Bento: una card in evidenza + griglia.
@@ -47,14 +47,23 @@ Ogni tappa è un’esperienza che arricchisce: scopri dove e quando.
 </p>
         </Reveal>
 
-        <div className="eventi-grid">
-          <Reveal as="div" className="eventi-grid__feat"><EventoCard evento={first} featured /></Reveal>
-          <div className="eventi-grid__rest">
-            {rest.map((e, i) => (
-              <Reveal as="div" key={e.id} delay={80 * (i + 1)}><EventoCard evento={e} /></Reveal>
-            ))}
+        {UNNA._loading ? (
+          <div className="eventi-grid">
+            <div className="eventi-grid__feat"><SkeletonCard featured /></div>
+            <div className="eventi-grid__rest">
+              <SkeletonCard /><SkeletonCard /><SkeletonCard />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="eventi-grid">
+            <Reveal as="div" className="eventi-grid__feat"><EventoCard evento={first} featured /></Reveal>
+            <div className="eventi-grid__rest">
+              {rest.map((e, i) => (
+                <Reveal as="div" key={e.id} delay={80 * (i + 1)}><EventoCard evento={e} /></Reveal>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

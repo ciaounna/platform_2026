@@ -16,12 +16,13 @@ function _applicaTinte(eventi) {
   return eventi;
 }
 
-// Renderizza subito con i dati statici, poi aggiorna in background.
+// Mostra skeleton durante il caricamento, poi aggiorna con i dati reali.
 window.unnaInit = function (renderFn) {
-  _applicaTinte(UNNA.eventi); // applica tinte agli eventi statici
+  const url = window.UNNA_API_URL;
+  UNNA._loading = !!url;
+  _applicaTinte(UNNA.eventi);
   renderFn();
 
-  const url = window.UNNA_API_URL;
   if (!url) return;
 
   fetch(url + "?action=eventi")
@@ -29,8 +30,12 @@ window.unnaInit = function (renderFn) {
     .then(eventi => {
       if (Array.isArray(eventi) && eventi.length) {
         UNNA.eventi = _applicaTinte(eventi);
-        window.dispatchEvent(new CustomEvent("unna:refresh"));
       }
+      UNNA._loading = false;
+      window.dispatchEvent(new CustomEvent("unna:refresh"));
     })
-    .catch(() => {});
+    .catch(() => {
+      UNNA._loading = false;
+      window.dispatchEvent(new CustomEvent("unna:refresh"));
+    });
 };

@@ -2,6 +2,24 @@
    unna — stili componenti (blob, media evento, onde)
    ============================================================ */
 
+/* Skeleton loading --------------------------------------- */
+@keyframes skeletonShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-pulse {
+  background: linear-gradient(90deg, var(--grigio-150) 25%, #e8e8e8 50%, var(--grigio-150) 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+.skeleton-card { border-radius: var(--r-lg); overflow: hidden; background: var(--crema); }
+.skeleton-card--big .skeleton-card__media { aspect-ratio: 16 / 10; }
+.skeleton-card__media { aspect-ratio: 4 / 3; width: 100%; }
+.skeleton-card__body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.skeleton-line { height: 14px; border-radius: 7px; width: 100%; }
+.skeleton-line--short { width: 38%; }
+.skeleton-line--med { width: 65%; }
+
 /* Blob avatar -------------------------------------------- */
 .blob {
   position: relative;
