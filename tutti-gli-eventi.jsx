@@ -4,10 +4,13 @@
 // ============================================================
 
 function TuttiGliEventiPage() {
-  const [, refresh] = React.useReducer(x => x + 1, 0);
+  const [loading, setLoading] = React.useState(!!window.UNNA_API_URL);
+
   React.useEffect(() => {
-    window.addEventListener("unna:refresh", refresh);
-    return () => window.removeEventListener("unna:refresh", refresh);
+    if (!UNNA._loading) { setLoading(false); return; }
+    const handler = () => setLoading(false);
+    window.addEventListener("unna:refresh", handler);
+    return () => window.removeEventListener("unna:refresh", handler);
   }, []);
 
   const eventi = UNNA.eventi;
@@ -31,7 +34,7 @@ function TuttiGliEventiPage() {
       </div>
 
       <main className="wrap tge-grid" id="main">
-        {UNNA._loading
+        {loading
           ? [1,2,3,4].map(i => <SkeletonCard key={i} />)
           : eventi.map((e) => <EventoCard key={e.id} evento={e} />)
         }

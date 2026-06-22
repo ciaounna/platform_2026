@@ -28,7 +28,7 @@ function EventoCard({ evento, featured }) {
   );
 }
 
-function Eventi() {
+function Eventi({ loading = false }) {
   const today = new Date();
   const eventi = [...UNNA.eventi]
     .sort((a, b) => Math.abs(new Date(a.dataISO) - today) - Math.abs(new Date(b.dataISO) - today))
@@ -47,7 +47,7 @@ Ogni tappa è un’esperienza che arricchisce: scopri dove e quando.
 </p>
         </Reveal>
 
-        {UNNA._loading ? (
+        {loading ? (
           <div className="eventi-grid">
             <div className="eventi-grid__feat"><SkeletonCard featured /></div>
             <div className="eventi-grid__rest">

@@ -20,10 +20,12 @@ const ACCENT_SOFT = {
 };
 
 function App() {
-  const [, refresh] = React.useReducer(x => x + 1, 0);
+  const [eventiLoading, setEventiLoading] = React.useState(!!window.UNNA_API_URL);
   useEffectA(() => {
-    window.addEventListener("unna:refresh", refresh);
-    return () => window.removeEventListener("unna:refresh", refresh);
+    if (!UNNA._loading) { setEventiLoading(false); return; }
+    const handler = () => setEventiLoading(false);
+    window.addEventListener("unna:refresh", handler);
+    return () => window.removeEventListener("unna:refresh", handler);
   }, []);
 
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
@@ -43,7 +45,7 @@ function App() {
       <main id="main">
         <Hero variant={t.heroVariant} />
         <Team layout={t.teamLayout} />
-        <Eventi />
+        <Eventi loading={eventiLoading} />
         <Manifesto />
         <Contatti />
       </main>

@@ -45,13 +45,16 @@ function EventoSkeleton() {
 }
 
 function EventoPage() {
-  const [, refresh] = React.useReducer(x => x + 1, 0);
+  const [loading, setLoading] = React.useState(!!window.UNNA_API_URL);
+
   React.useEffect(() => {
-    window.addEventListener("unna:refresh", refresh);
-    return () => window.removeEventListener("unna:refresh", refresh);
+    if (!UNNA._loading) { setLoading(false); return; }
+    const handler = () => setLoading(false);
+    window.addEventListener("unna:refresh", handler);
+    return () => window.removeEventListener("unna:refresh", handler);
   }, []);
 
-  if (UNNA._loading) return <EventoSkeleton />;
+  if (loading) return <EventoSkeleton />;
 
   const ev = getEvento();
   if (!ev) return <NotFound />;
