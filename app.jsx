@@ -35,8 +35,10 @@ function App() {
     if (!hash) return;
     const t = setTimeout(() => {
       const el = document.querySelector(hash);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 300);
+      if (!el) return;
+      const navH = document.querySelector(".nav") ? document.querySelector(".nav").offsetHeight : 70;
+      window.scrollTo({ top: el.offsetTop - navH, behavior: "smooth" });
+    }, 800);
     return () => clearTimeout(t);
   }, []);
 
