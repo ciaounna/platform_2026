@@ -31,6 +31,13 @@ function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
 
   useEffectA(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const el = document.querySelector(hash);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }, [eventiLoading]);
+
+  useEffectA(() => {
     const root = document.documentElement;
     root.style.setProperty("--accent", t.accent);
     root.style.setProperty("--accent-soft", ACCENT_SOFT[t.accent] || "#FFE8D8");
