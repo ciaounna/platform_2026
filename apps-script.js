@@ -12,6 +12,10 @@ function doGet(e) {
     return jsonResponse(getEventi());
   }
 
+  if (action === "galleria") {
+    return jsonResponse(getGalleria());
+  }
+
   if (action === "iscrizione") {
     if (e.parameter.email) {
       saveIscrizione({ nome: e.parameter.nome || "", email: e.parameter.email });
@@ -72,6 +76,25 @@ function getEventi() {
 
       return obj;
     });
+}
+
+function getGalleria() {
+  const sheet = SpreadsheetApp.openById(FOGLIO_ID).getSheetByName("galleria");
+  if (!sheet) return [];
+  const rows = sheet.getDataRange().getValues();
+  const headers = rows[0];
+  return rows.slice(1)
+    .filter(r => r[0])
+    .map(row => {
+      const obj = {};
+      headers.forEach((h, i) => { obj[h] = row[i]; });
+      if (typeof obj.tags === "string") {
+        obj.tags = obj.tags.split(",").map(t => t.trim()).filter(Boolean);
+      }
+      if (obj.data instanceof Date) obj.data = obj.data.toISOString().slice(0, 10);
+      return obj;
+    })
+    .sort((a, b) => new Date(b.data) - new Date(a.data));
 }
 
 function saveIscrizione(data) {
