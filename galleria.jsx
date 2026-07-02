@@ -155,7 +155,7 @@ function GalleriaPage() {
     <div>
       <header className="ev-top">
         <div className="wrap ev-top__inner">
-          <a className="nav__logo" href="index.html">unna<span style={{ color: "var(--arancio)" }}>.</span></a>
+          <a className="nav__logo" href="index.html">unna</a>
         </div>
       </header>
 
@@ -166,7 +166,7 @@ function GalleriaPage() {
             Torna indietro
           </button>
           <h1 className="tge-head__title">I nostri <em>momenti</em></h1>
-          <p className="tge-head__lead">Una raccolta di istanti dalla Sicilia interna — comunità, territorio, bellezza.</p>
+          <p className="tge-head__lead">Una raccolta di istanti — comunità, territorio, bellezza.</p>
         </div>
       </div>
 
