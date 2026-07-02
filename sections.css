@@ -408,7 +408,7 @@
 .gal-card--skeleton { pointer-events: none; }
 
 /* Bento home: sinistra (4:3) determina altezza, destra si allunga per raggiungerla */
-.gal-bento { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(14px, 2vw, 22px); align-items: stretch; }
+.gal-bento { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(14px, 2vw, 22px); align-items: stretch; }
 .gal-bento__feat .gal-card { width: 100%; }
 .gal-bento__feat .gal-card__media { aspect-ratio: 4 / 3; }
 .gal-bento__rest { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 22px); align-content: stretch; }
