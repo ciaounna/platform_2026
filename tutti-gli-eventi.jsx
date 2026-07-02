@@ -13,7 +13,10 @@ function TuttiGliEventiPage() {
     return () => window.removeEventListener("unna:refresh", handler);
   }, []);
 
-  const eventi = UNNA.eventi;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const upcoming = [...UNNA.eventi].filter(e => new Date(e.dataISO) >= today).sort((a, b) => new Date(a.dataISO) - new Date(b.dataISO));
+  const past     = [...UNNA.eventi].filter(e => new Date(e.dataISO) <  today).sort((a, b) => new Date(b.dataISO) - new Date(a.dataISO));
+  const eventi = [...upcoming, ...past];
   return (
     <div>
       <header className="ev-top">
@@ -36,7 +39,7 @@ function TuttiGliEventiPage() {
       <main className="wrap tge-grid" id="main">
         {loading
           ? [1,2,3,4].map(i => <SkeletonCard key={i} />)
-          : eventi.map((e) => <EventoCard key={e.id} evento={e} />)
+          : eventi.map((e) => <EventoCard key={e.id} evento={e} past={new Date(e.dataISO) < today} />)
         }
       </main>
 

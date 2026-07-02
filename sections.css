@@ -254,6 +254,15 @@
 .evento-card__tag { font-family: var(--font-display); font-weight: 600; font-size: 0.78rem; padding: 6px 13px; border-radius: var(--r-pill); background: var(--ev-soft); color: var(--ev-ink); }
 .evento-card__go { display: grid; place-items: center; width: 46px; height: 46px; flex: none; border-radius: 50%; background: var(--ev-bg); color: var(--ev-fg); transition: transform .4s var(--ease); }
 .evento-card:hover .evento-card__go { transform: rotate(45deg) scale(1.08); }
+.evento-card--past { opacity: 0.55; }
+.evento-card--past:hover { opacity: 0.75; }
+.evento-card__badge-past {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.72rem;
+  background: var(--inchiostro); color: var(--crema);
+  padding: 5px 11px; border-radius: var(--r-pill);
+  box-shadow: var(--shadow-sm); letter-spacing: 0.02em;
+}
 .evento-card--big .evento-card__media .evento-media { aspect-ratio: 16 / 10; }
 
 @media (max-width: 920px) {
