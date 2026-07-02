@@ -32,7 +32,7 @@ function TuttiGliEventiPage() {
             Torna indietro
           </button>
           <h1 className="tge-head__title">Tutti gli <em>eventi</em></h1>
-          <p className="tge-head__lead">Sagre, cammini e incontri che attivano i territori della Sicilia interna.</p>
+          <p className="tge-head__lead">Incontri, dibattiti, passeggiate, sagre... Tutto ciò che attiva i territori.</p>
         </div>
       </div>
 
