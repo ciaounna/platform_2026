@@ -1,7 +1,7 @@
 // ============================================================
 // unna — API
 // ============================================================
-window.UNNA_API_URL = "https://script.google.com/macros/s/AKfycbxytemwdhYr3vbkuMUFORWZ8FPoCqkR5L4zf1k2Cy9FTvlOTK320kb9Sc822btXCLp-pw/exec";
+window.UNNA_API_URL = "https://script.google.com/macros/s/AKfycbyarXFI_xgOjOWz8GGC7elQ50Ju0RPRUebUrPUFsqa7sRI0ExJ0sQxu_6oSSH59mlZF/exec";
 
 // Assegna una tinta in modo deterministico dall'id dell'evento
 // (stesso id → stesso colore sempre, ma appare casuale tra eventi diversi)
