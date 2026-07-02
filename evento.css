@@ -12,7 +12,7 @@
 .ev-top__inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
 .ev-back { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; color: var(--inchiostro); transition: gap .3s, color .25s; background: none; border: none; padding: 0; cursor: pointer; font-size: inherit; }
 .ev-back:hover { color: var(--arancio); }
-.ev-back__ico { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--viola-050); color: var(--arancio); transform: rotate(180deg); }
+.ev-back__ico { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--viola); color: var(--crema); transform: rotate(180deg); }
 .ev-back--inline { margin-bottom: 20px; }
 
 .ev-ribbon { height: 12px; background: var(--ev-bg); position: relative; overflow: hidden; }
@@ -107,11 +107,11 @@
 }
 
 /* ===== Tutti gli eventi ===== */
-.tge-head { background: var(--viola); color: var(--crema); padding: clamp(60px, 8vw, 100px) 0 clamp(40px, 5vw, 64px); }
+.tge-head { background: var(--bianco); color: var(--inchiostro); padding: clamp(60px, 8vw, 100px) 0 clamp(40px, 5vw, 64px); }
 .tge-head__title { font-size: clamp(2.6rem, 7vw, 5rem); margin: 0; letter-spacing: -0.03em; line-height: 1; }
 .tge-head__title em { font-style: normal; color: var(--arancio); }
-.tge-head__lead { color: rgba(246,246,246,0.8); font-size: clamp(1.05rem, 2vw, 1.3rem); margin: 18px 0 0; max-width: 540px; text-wrap: pretty; }
+.tge-head__lead { color: var(--grigio-700); font-size: clamp(1.05rem, 2vw, 1.3rem); margin: 18px 0 0; max-width: 540px; text-wrap: pretty; }
 .tge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: clamp(16px, 2vw, 24px); padding-top: clamp(48px, 6vw, 72px); padding-bottom: clamp(48px, 6vw, 72px); }
 
 /* Link "Tutti gli eventi" nella home */
-.tge-back { color: rgba(246,246,246,0.75); margin-bottom: 28px; }
+.tge-back { color: var(--inchiostro); margin-bottom: 28px; }
