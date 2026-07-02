@@ -3,24 +3,47 @@
 // unna — Galleria fotografica
 // ============================================================
 
-const GALLERIA_LIMIT = 8;
+const GALLERIA_LIMIT = 5;
 
-function GalleriaLightbox({ foto, onClose }) {
+// Lightbox con navigazione frecce tra le foto
+function GalleriaLightbox({ fotos, index, onClose, onChange }) {
   React.useEffect(() => {
-    const esc = (e) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", esc);
+    const handler = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft"  && index > 0)              onChange(index - 1);
+      if (e.key === "ArrowRight" && index < fotos.length - 1) onChange(index + 1);
+    };
+    document.addEventListener("keydown", handler);
     document.body.style.overflow = "hidden";
     return () => {
-      document.removeEventListener("keydown", esc);
+      document.removeEventListener("keydown", handler);
       document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, [index, fotos.length, onClose, onChange]);
+
+  const foto = fotos[index];
 
   return (
     <div className="gal-lb" onClick={onClose} role="dialog" aria-modal="true">
       <button className="gal-lb__close" onClick={onClose} aria-label="Chiudi">
         <Icon name="close" size={22} />
       </button>
+
+      {index > 0 && (
+        <button className="gal-lb__nav gal-lb__nav--prev"
+          onClick={e => { e.stopPropagation(); onChange(index - 1); }}
+          aria-label="Foto precedente">
+          <Icon name="arrowR" size={22} />
+        </button>
+      )}
+      {index < fotos.length - 1 && (
+        <button className="gal-lb__nav gal-lb__nav--next"
+          onClick={e => { e.stopPropagation(); onChange(index + 1); }}
+          aria-label="Foto successiva">
+          <Icon name="arrowR" size={22} />
+        </button>
+      )}
+
       <div className="gal-lb__inner" onClick={e => e.stopPropagation()}>
         <div className="gal-lb__media">
           <img src={foto.src} alt={foto.descrizione || foto.luogo || "Foto"} />
@@ -36,12 +59,14 @@ function GalleriaLightbox({ foto, onClose }) {
               {foto.tags.map(t => <span key={t} className="gal-lb__tag">{t}</span>)}
             </div>
           )}
+          <div className="gal-lb__counter">{index + 1} / {fotos.length}</div>
         </div>
       </div>
     </div>
   );
 }
 
+// Card: solo foto, click apre lightbox
 function GalleriaCard({ foto, onClick }) {
   return (
     <div className="gal-card" onClick={onClick} role="button" tabIndex={0}
@@ -54,89 +79,66 @@ function GalleriaCard({ foto, onClick }) {
   );
 }
 
+// Home: bento layout (1 grande + 4 piccole), max 5 foto più recenti
 function GalleriaCarousel({ loading = false }) {
-  const trackRef = React.useRef(null);
-  const [selected, setSelected] = React.useState(null);
-  const [canLeft, setCanLeft] = React.useState(false);
-  const [canRight, setCanRight] = React.useState(false);
+  const [selectedIdx, setSelectedIdx] = React.useState(null);
   const foto = (UNNA.galleria || []).slice(0, GALLERIA_LIMIT);
-
-  React.useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const check = () => {
-      setCanLeft(track.scrollLeft > 4);
-      setCanRight(track.scrollLeft < track.scrollWidth - track.clientWidth - 4);
-    };
-    const t = setTimeout(check, 80);
-    track.addEventListener("scroll", check, { passive: true });
-    window.addEventListener("resize", check);
-    return () => {
-      clearTimeout(t);
-      track.removeEventListener("scroll", check);
-      window.removeEventListener("resize", check);
-    };
-  }, [foto.length, loading]);
-
-  function scroll(dir) {
-    const track = trackRef.current;
-    if (!track) return;
-    const card = track.querySelector(".gal-card");
-    track.scrollBy({ left: dir * ((card ? card.offsetWidth : 300) + 20), behavior: "smooth" });
-  }
+  const [first, ...rest] = foto;
 
   return (
     <section className="section gal-sec" id="galleria">
       <div className="wrap">
-        <div className="gal-carousel-wrap">
-          {canLeft && (
-            <button className="gal-arrow gal-arrow--prev" onClick={() => scroll(-1)} aria-label="Scorri a sinistra">
-              <Icon name="arrowR" size={20} />
-            </button>
-          )}
-
-          {loading ? (
-            <div className="gal-track">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="gal-card gal-card--skeleton">
-                  <div className="gal-card__media skeleton-pulse" />
-                </div>
+        {loading ? (
+          <div className="gal-bento">
+            <div className="gal-bento__feat">
+              <div className="gal-card gal-card--skeleton"><div className="gal-card__media skeleton-pulse" /></div>
+            </div>
+            <div className="gal-bento__rest">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="gal-card gal-card--skeleton"><div className="gal-card__media skeleton-pulse" /></div>
               ))}
             </div>
-          ) : foto.length === 0 ? (
-            <p className="gal-empty">Le prime foto arriveranno presto!</p>
-          ) : (
-            <div className="gal-track" ref={trackRef}>
-              {foto.map((f, i) => (
-                <Reveal as="div" key={f.id || i} delay={50 * i}>
-                  <GalleriaCard foto={f} onClick={() => setSelected(f)} />
+          </div>
+        ) : foto.length === 0 ? (
+          <p className="gal-empty">Le prime foto arriveranno presto!</p>
+        ) : (
+          <div className="gal-bento">
+            <Reveal as="div" className="gal-bento__feat">
+              <GalleriaCard foto={first} onClick={() => setSelectedIdx(0)} />
+            </Reveal>
+            <div className="gal-bento__rest">
+              {rest.map((f, i) => (
+                <Reveal as="div" key={f.id || i} delay={80 * (i + 1)}>
+                  <GalleriaCard foto={f} onClick={() => setSelectedIdx(i + 1)} />
                 </Reveal>
               ))}
             </div>
-          )}
-
-          {canRight && (
-            <button className="gal-arrow gal-arrow--next" onClick={() => scroll(1)} aria-label="Scorri a destra">
-              <Icon name="arrowR" size={20} />
-            </button>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="gal-sec__foot">
           <a className="eventi__all" href="galleria.html">Vedi tutte le foto <Icon name="arrowR" size={16} /></a>
         </div>
       </div>
 
-      {selected && <GalleriaLightbox foto={selected} onClose={() => setSelected(null)} />}
+      {selectedIdx !== null && (
+        <GalleriaLightbox
+          fotos={foto}
+          index={selectedIdx}
+          onClose={() => setSelectedIdx(null)}
+          onChange={setSelectedIdx}
+        />
+      )}
     </section>
   );
 }
 
+// Pagina dedicata: griglia completa con filtri tag
 function GalleriaPage() {
   const [loading, setLoading] = React.useState(!!window.UNNA_API_URL && !!UNNA._galleriaLoading);
   const [galleria, setGalleria] = React.useState(UNNA.galleria || []);
   const [activeTag, setActiveTag] = React.useState(null);
-  const [selected, setSelected] = React.useState(null);
+  const [selectedIdx, setSelectedIdx] = React.useState(null);
 
   React.useEffect(() => {
     const handler = () => {
@@ -189,7 +191,9 @@ function GalleriaPage() {
             ))
           : filtered.length === 0
           ? <p className="gal-empty gal-empty--page">Nessuna foto trovata.</p>
-          : filtered.map((f, i) => <GalleriaCard key={f.id || i} foto={f} onClick={() => setSelected(f)} />)
+          : filtered.map((f, i) => (
+              <GalleriaCard key={f.id || i} foto={f} onClick={() => setSelectedIdx(i)} />
+            ))
         }
       </main>
 
@@ -200,7 +204,14 @@ function GalleriaPage() {
         </div>
       </footer>
 
-      {selected && <GalleriaLightbox foto={selected} onClose={() => setSelected(null)} />}
+      {selectedIdx !== null && (
+        <GalleriaLightbox
+          fotos={filtered}
+          index={selectedIdx}
+          onClose={() => setSelectedIdx(null)}
+          onChange={setSelectedIdx}
+        />
+      )}
     </div>
   );
 }
