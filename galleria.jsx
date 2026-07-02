@@ -117,7 +117,7 @@ function GalleriaCarousel({ loading = false }) {
         )}
 
         <div className="gal-sec__foot">
-          <a className="eventi__all" href="galleria.html">Vedi tutte le foto <Icon name="arrowR" size={16} /></a>
+          <a className="eventi__all" href="galleria.html">Sfoglia galleria <Icon name="arrowR" size={16} /></a>
         </div>
       </div>
 
@@ -137,7 +137,6 @@ function GalleriaCarousel({ loading = false }) {
 function GalleriaPage() {
   const [loading, setLoading] = React.useState(!!window.UNNA_API_URL && !!UNNA._galleriaLoading);
   const [galleria, setGalleria] = React.useState(UNNA.galleria || []);
-  const [activeTag, setActiveTag] = React.useState(null);
   const [selectedIdx, setSelectedIdx] = React.useState(null);
 
   React.useEffect(() => {
@@ -150,8 +149,7 @@ function GalleriaPage() {
     return () => window.removeEventListener("unna:galleria", handler);
   }, []);
 
-  const allTags = [...new Set(galleria.flatMap(f => f.tags || []))].sort();
-  const filtered = activeTag ? galleria.filter(f => (f.tags || []).includes(activeTag)) : galleria;
+  const filtered = galleria;
 
   return (
     <div>
@@ -171,16 +169,6 @@ function GalleriaPage() {
           <p className="tge-head__lead">Una raccolta di istanti dalla Sicilia interna — comunità, territorio, bellezza.</p>
         </div>
       </div>
-
-      {!loading && allTags.length > 0 && (
-        <div className="wrap gal-filters" role="group" aria-label="Filtra per tag">
-          <button className={`gal-filter${!activeTag ? " gal-filter--active" : ""}`} onClick={() => setActiveTag(null)}>Tutte</button>
-          {allTags.map(t => (
-            <button key={t} className={`gal-filter${activeTag === t ? " gal-filter--active" : ""}`}
-              onClick={() => setActiveTag(activeTag === t ? null : t)}>{t}</button>
-          ))}
-        </div>
-      )}
 
       <main className="wrap gal-grid" id="main">
         {loading
