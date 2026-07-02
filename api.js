@@ -20,6 +20,7 @@ function _applicaTinte(eventi) {
 window.unnaInit = function (renderFn) {
   const url = window.UNNA_API_URL;
   UNNA._loading = !!url;
+  UNNA._galleriaLoading = !!url;
   _applicaTinte(UNNA.eventi);
   renderFn();
 
@@ -37,5 +38,17 @@ window.unnaInit = function (renderFn) {
     .catch(() => {
       UNNA._loading = false;
       window.dispatchEvent(new CustomEvent("unna:refresh"));
+    });
+
+  fetch(url + "?action=galleria")
+    .then(r => r.json())
+    .then(galleria => {
+      if (Array.isArray(galleria)) UNNA.galleria = galleria;
+      UNNA._galleriaLoading = false;
+      window.dispatchEvent(new CustomEvent("unna:galleria"));
+    })
+    .catch(() => {
+      UNNA._galleriaLoading = false;
+      window.dispatchEvent(new CustomEvent("unna:galleria"));
     });
 };

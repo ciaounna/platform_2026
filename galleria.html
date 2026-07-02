@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>unna — Un progetto che ri-genera</title>
-  <meta name="description" content="unna: una mappa-rete viva di persone e luoghi nella Sicilia interna. Eventi, comunità e rigenerazione dei territori." />
+  <title>unna — Galleria fotografica</title>
+  <meta name="description" content="Foto, momenti e luoghi della Sicilia interna — la galleria di unna." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="components.css" />
   <link rel="stylesheet" href="sections.css" />
+  <link rel="stylesheet" href="evento.css" />
 </head>
 <body>
   <a href="#main" class="sr-only">Salta al contenuto</a>
@@ -23,14 +24,9 @@
   <script src="data.js"></script>
   <script src="api.js"></script>
   <script type="text/babel" src="shared.jsx"></script>
-  <script type="text/babel" src="nav.jsx"></script>
-  <script type="text/babel" src="hero.jsx"></script>
   <script type="text/babel" src="galleria.jsx"></script>
-  <script type="text/babel" src="team.jsx"></script>
-  <script type="text/babel" src="eventi.jsx"></script>
-  <script type="text/babel" src="manifesto.jsx"></script>
-  <script type="text/babel" src="contatti.jsx"></script>
-  <script type="text/babel" src="tweaks-panel.jsx"></script>
-  <script type="text/babel" src="app.jsx"></script>
+  <script type="text/babel">
+    unnaInit(() => ReactDOM.createRoot(document.getElementById("root")).render(<GalleriaPage />));
+  </script>
 </body>
 </html>

@@ -4,6 +4,8 @@
    (Sicilia interna) — da sostituire con dati reali.
    ============================================================ */
 window.UNNA = {
+  galleria: [],
+
   social: {
     instagram: "https://www.instagram.com/unna.city/",
     instagramHandle: "@unna.city",

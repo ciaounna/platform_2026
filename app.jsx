@@ -1,4 +1,4 @@
-/* global React, ReactDOM, Header, Hero, Team, Eventi, Manifesto, Contatti, Footer,
+/* global React, ReactDOM, Header, Hero, GalleriaCarousel, Team, Eventi, Manifesto, Contatti, Footer,
    useTweaks, TweaksPanel, TweakSection, TweakRadio, TweakColor, TweakSlider */
 // ============================================================
 // unna — App (home). Compone le sezioni + Tweaks per le varianti.
@@ -26,6 +26,14 @@ function App() {
     const handler = () => setEventiLoading(false);
     window.addEventListener("unna:refresh", handler);
     return () => window.removeEventListener("unna:refresh", handler);
+  }, []);
+
+  const [galleriaLoading, setGalleriaLoading] = React.useState(!!window.UNNA_API_URL);
+  useEffectA(() => {
+    if (!UNNA._galleriaLoading) { setGalleriaLoading(false); return; }
+    const handler = () => setGalleriaLoading(false);
+    window.addEventListener("unna:galleria", handler);
+    return () => window.removeEventListener("unna:galleria", handler);
   }, []);
 
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
@@ -56,6 +64,7 @@ function App() {
       <Header heroDark={heroDark} />
       <main id="main">
         <Hero variant={t.heroVariant} />
+        <GalleriaCarousel loading={galleriaLoading} />
         <Team layout={t.teamLayout} />
         <Eventi loading={eventiLoading} />
         <Manifesto />

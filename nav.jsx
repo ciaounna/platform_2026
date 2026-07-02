@@ -5,6 +5,7 @@
 const { useState: useStateN, useEffect: useEffectN } = React;
 
 const NAV = [
+  { id: "galleria", label: "Galleria" },
   { id: "team", label: "Team" },
   { id: "eventi", label: "Eventi" },
   { id: "manifesto", label: "Manifesto" },
@@ -94,6 +95,7 @@ function Footer() {
           <div>
             <h4>Vai a</h4>
             {NAV.map((n) => <a key={n.id} href={`#${n.id}`}>{n.label}</a>)}
+            <a href="galleria.html">Tutte le foto</a>
           </div>
           <div>
             <h4>Contatti</h4>
