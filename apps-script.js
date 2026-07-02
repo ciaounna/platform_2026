@@ -78,6 +78,14 @@ function getEventi() {
     });
 }
 
+function driveToImg(url) {
+  if (!url) return url;
+  var match = String(url).match(/(?:\/d\/|id=)([a-zA-Z0-9_-]{25,})/);
+  return match
+    ? "https://drive.google.com/thumbnail?id=" + match[1] + "&sz=w800"
+    : String(url);
+}
+
 function getGalleria() {
   const sheet = SpreadsheetApp.openById(FOGLIO_ID).getSheetByName("galleria");
   if (!sheet) return [];
@@ -92,6 +100,7 @@ function getGalleria() {
         obj.tags = obj.tags.split(",").map(t => t.trim()).filter(Boolean);
       }
       if (obj.data instanceof Date) obj.data = obj.data.toISOString().slice(0, 10);
+      if (obj.src) obj.src = driveToImg(obj.src);
       return obj;
     })
     .sort((a, b) => new Date(b.data) - new Date(a.data));
