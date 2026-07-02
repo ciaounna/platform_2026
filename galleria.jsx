@@ -30,7 +30,7 @@ function GalleriaCard({ foto }) {
 
 function GalleriaCarousel({ loading = false }) {
   const trackRef = React.useRef(null);
-  const foto = UNNA.galleria.slice(0, GALLERIA_LIMIT);
+  const foto = (UNNA.galleria || []).slice(0, GALLERIA_LIMIT);
 
   function scroll(dir) {
     const track = trackRef.current;
@@ -91,12 +91,12 @@ function GalleriaCarousel({ loading = false }) {
 
 function GalleriaPage() {
   const [loading, setLoading] = React.useState(!!window.UNNA_API_URL && !!UNNA._galleriaLoading);
-  const [galleria, setGalleria] = React.useState(UNNA.galleria);
+  const [galleria, setGalleria] = React.useState(UNNA.galleria || []);
   const [activeTag, setActiveTag] = React.useState(null);
 
   React.useEffect(() => {
     const handler = () => {
-      setGalleria([...UNNA.galleria]);
+      setGalleria([...(UNNA.galleria || [])]);
       setLoading(false);
     };
     if (!UNNA._galleriaLoading) { setLoading(false); return; }
