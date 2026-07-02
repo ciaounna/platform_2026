@@ -19,7 +19,7 @@ function Manifesto() {
         <div className="manifesto__grid">
           <Reveal className="manifesto__text" delay={100}>
             <p>
-              unna è una rete viva di persone e luoghi: un'onda che attraversa la Sicilia interna ridistribuendo i flussi nello spazio e nel tempo.
+              unna è una rete viva di persone e luoghi: un'onda che ridistribuisce i flussi nello spazio e nel tempo.
             </p>
             <p>
               Riscopriamo, mappiamo e attiviamo il territorio insieme, per imparare a guardare con occhi nuovi quello che già ci circonda.

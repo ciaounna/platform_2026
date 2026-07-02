@@ -89,7 +89,7 @@ function Footer() {
       <div className="wrap footer__inner">
         <div className="footer__brand">
           <span className="footer__logo">unna</span>
-          <p>L'onda del cambiamento nella Sicilia interna.</p>
+          <p>Un'onda che genera cambiamento nei territori.</p>
         </div>
         <div className="footer__cols">
           <div>
@@ -106,7 +106,7 @@ function Footer() {
       </div>
       <div className="wrap footer__base">
         <span>© 2026 unna · Moviti fermu</span>
-        <span>Siamo unna, siamo tante.</span>
+        <span>© 2026 unna · Moviti fermu</span>
       </div>
     </footer>
   );

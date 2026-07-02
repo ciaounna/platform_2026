@@ -7,8 +7,8 @@ window.UNNA = {
   galleria: [],
 
   social: {
-    instagram: "https://www.instagram.com/unna.city/",
-    instagramHandle: "@unna.city",
+    instagram: "https://www.instagram.com/unna.vai/",
+    instagramHandle: "@unna.vai",
     email: "unna.city@gmail.com",
   },
 
