@@ -398,9 +398,11 @@
 .gal-card:hover .gal-card__media img { transform: scale(1.04); }
 .gal-card--skeleton { pointer-events: none; }
 
-/* Bento home (specchio di eventi-grid) */
-.gal-bento { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(14px, 2vw, 22px); align-items: start; }
-.gal-bento__feat .gal-card { width: 100%; }
+/* Bento home: destra (2x2 a 4:3) determina l'altezza, sinistra riempie */
+.gal-bento { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(14px, 2vw, 22px); align-items: stretch; }
+.gal-bento__feat { display: flex; }
+.gal-bento__feat .gal-card { flex: 1; width: 100%; }
+.gal-bento__feat .gal-card__media { aspect-ratio: unset; height: 100%; }
 .gal-bento__rest { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 22px); }
 
 .gal-sec__foot { display: flex; justify-content: flex-end; margin-top: clamp(16px, 2vw, 24px); }
