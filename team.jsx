@@ -61,7 +61,7 @@ function Team({ layout = "onda" }) {
           <div>
             <h2 id="team-h" className="section-title">Siamo unna,<br/>siamo <em>tante</em>.</h2>
           </div>
-          <p className="section-lead">Mix di esperienze, competenze e passioni a servizio della ri-generazione. Ognuna è un nodo dell'onda — passa o tocca per conoscerle.</p>
+          <p className="section-lead">Mix di esperienze, competenze e passioni a servizio della ri-generazione. Ognuna è un nodo dell'onda — passa con il mouse o clicca per conoscerle.</p>
         </Reveal>
 
         {layout === "onda" ? (
