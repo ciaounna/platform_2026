@@ -57,27 +57,47 @@ function GalleriaCard({ foto, onClick }) {
 function GalleriaCarousel({ loading = false }) {
   const trackRef = React.useRef(null);
   const [selected, setSelected] = React.useState(null);
+  const [canLeft, setCanLeft] = React.useState(false);
+  const [canRight, setCanRight] = React.useState(false);
   const foto = (UNNA.galleria || []).slice(0, GALLERIA_LIMIT);
+
+  React.useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const check = () => {
+      setCanLeft(track.scrollLeft > 4);
+      setCanRight(track.scrollLeft < track.scrollWidth - track.clientWidth - 4);
+    };
+    const t = setTimeout(check, 80);
+    track.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => {
+      clearTimeout(t);
+      track.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [foto.length, loading]);
 
   function scroll(dir) {
     const track = trackRef.current;
     if (!track) return;
     const card = track.querySelector(".gal-card");
-    const cardW = card ? card.offsetWidth + 20 : 300;
-    track.scrollBy({ left: dir * cardW * 2, behavior: "smooth" });
+    track.scrollBy({ left: dir * ((card ? card.offsetWidth : 300) + 20), behavior: "smooth" });
   }
 
   return (
     <section className="section gal-sec" id="galleria">
       <div className="wrap">
         <div className="gal-carousel-wrap">
-          <button className="gal-arrow gal-arrow--prev" onClick={() => scroll(-1)} aria-label="Scorri a sinistra">
-            <Icon name="arrowR" size={20} />
-          </button>
+          {canLeft && (
+            <button className="gal-arrow gal-arrow--prev" onClick={() => scroll(-1)} aria-label="Scorri a sinistra">
+              <Icon name="arrowR" size={20} />
+            </button>
+          )}
 
           {loading ? (
             <div className="gal-track">
-              {[1, 2, 3, 4].map(i => (
+              {[1, 2, 3].map(i => (
                 <div key={i} className="gal-card gal-card--skeleton">
                   <div className="gal-card__media skeleton-pulse" />
                 </div>
@@ -95,9 +115,11 @@ function GalleriaCarousel({ loading = false }) {
             </div>
           )}
 
-          <button className="gal-arrow gal-arrow--next" onClick={() => scroll(1)} aria-label="Scorri a destra">
-            <Icon name="arrowR" size={20} />
-          </button>
+          {canRight && (
+            <button className="gal-arrow gal-arrow--next" onClick={() => scroll(1)} aria-label="Scorri a destra">
+              <Icon name="arrowR" size={20} />
+            </button>
+          )}
         </div>
 
         <div className="gal-sec__foot">
