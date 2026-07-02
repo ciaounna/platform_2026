@@ -1,28 +1,54 @@
 /* global React, ReactDOM, Icon, Reveal */
 // ============================================================
 // unna — Galleria fotografica
-// Esporta: GalleriaCarousel (home) + GalleriaPage (galleria.html)
 // ============================================================
 
 const GALLERIA_LIMIT = 8;
 
-function GalleriaCard({ foto }) {
+function GalleriaLightbox({ foto, onClose }) {
+  React.useEffect(() => {
+    const esc = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", esc);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", esc);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
   return (
-    <div className="gal-card">
+    <div className="gal-lb" onClick={onClose} role="dialog" aria-modal="true">
+      <button className="gal-lb__close" onClick={onClose} aria-label="Chiudi">
+        <Icon name="close" size={22} />
+      </button>
+      <div className="gal-lb__inner" onClick={e => e.stopPropagation()}>
+        <div className="gal-lb__media">
+          <img src={foto.src} alt={foto.descrizione || foto.luogo || "Foto"} />
+        </div>
+        <div className="gal-lb__body">
+          <div className="gal-lb__meta">
+            {foto.luogo && <span className="gal-lb__luogo"><Icon name="pin" size={13} /> {foto.luogo}</span>}
+            {foto.data && <span className="gal-lb__date">{foto.data}</span>}
+          </div>
+          {foto.descrizione && <p className="gal-lb__desc">{foto.descrizione}</p>}
+          {foto.tags && foto.tags.length > 0 && (
+            <div className="gal-lb__tags">
+              {foto.tags.map(t => <span key={t} className="gal-lb__tag">{t}</span>)}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GalleriaCard({ foto, onClick }) {
+  return (
+    <div className="gal-card" onClick={onClick} role="button" tabIndex={0}
+         onKeyDown={e => { if (e.key === "Enter" || e.key === " ") onClick(); }}
+         aria-label={foto.descrizione || "Apri foto"}>
       <div className="gal-card__media">
         <img src={foto.src} alt={foto.descrizione || foto.luogo || "Foto unna"} loading="lazy" />
-      </div>
-      <div className="gal-card__body">
-        <div className="gal-card__meta">
-          {foto.luogo && <span className="gal-card__luogo"><Icon name="pin" size={13} /> {foto.luogo}</span>}
-          {foto.data && <span className="gal-card__date">{foto.data}</span>}
-        </div>
-        {foto.descrizione && <p className="gal-card__desc">{foto.descrizione}</p>}
-        {foto.tags && foto.tags.length > 0 && (
-          <div className="gal-card__tags">
-            {foto.tags.map(t => <span key={t} className="gal-card__tag">{t}</span>)}
-          </div>
-        )}
       </div>
     </div>
   );
@@ -30,6 +56,7 @@ function GalleriaCard({ foto }) {
 
 function GalleriaCarousel({ loading = false }) {
   const trackRef = React.useRef(null);
+  const [selected, setSelected] = React.useState(null);
   const foto = (UNNA.galleria || []).slice(0, GALLERIA_LIMIT);
 
   function scroll(dir) {
@@ -41,16 +68,8 @@ function GalleriaCarousel({ loading = false }) {
   }
 
   return (
-    <section className="section gal-sec" id="galleria" aria-labelledby="gal-h">
+    <section className="section gal-sec" id="galleria">
       <div className="wrap">
-        <Reveal className="section-head gal-head">
-          <div>
-            <h2 id="gal-h" className="section-title">I momenti <em>che restano</em></h2>
-            <a className="eventi__all" href="galleria.html">Vedi tutte le foto <Icon name="arrowR" size={16} /></a>
-          </div>
-          <p className="section-lead">Ogni scatto racconta un pezzo di comunità. Istanti dalla Sicilia interna.</p>
-        </Reveal>
-
         <div className="gal-carousel-wrap">
           <button className="gal-arrow gal-arrow--prev" onClick={() => scroll(-1)} aria-label="Scorri a sinistra">
             <Icon name="arrowR" size={20} />
@@ -61,10 +80,6 @@ function GalleriaCarousel({ loading = false }) {
               {[1, 2, 3, 4].map(i => (
                 <div key={i} className="gal-card gal-card--skeleton">
                   <div className="gal-card__media skeleton-pulse" />
-                  <div className="gal-card__body">
-                    <div className="skeleton-pulse skeleton-line skeleton-line--short" style={{ marginBottom: 8 }} />
-                    <div className="skeleton-pulse skeleton-line skeleton-line--med" />
-                  </div>
                 </div>
               ))}
             </div>
@@ -74,7 +89,7 @@ function GalleriaCarousel({ loading = false }) {
             <div className="gal-track" ref={trackRef}>
               {foto.map((f, i) => (
                 <Reveal as="div" key={f.id || i} delay={50 * i}>
-                  <GalleriaCard foto={f} />
+                  <GalleriaCard foto={f} onClick={() => setSelected(f)} />
                 </Reveal>
               ))}
             </div>
@@ -84,7 +99,13 @@ function GalleriaCarousel({ loading = false }) {
             <Icon name="arrowR" size={20} />
           </button>
         </div>
+
+        <div className="gal-sec__foot">
+          <a className="eventi__all" href="galleria.html">Vedi tutte le foto <Icon name="arrowR" size={16} /></a>
+        </div>
       </div>
+
+      {selected && <GalleriaLightbox foto={selected} onClose={() => setSelected(null)} />}
     </section>
   );
 }
@@ -93,6 +114,7 @@ function GalleriaPage() {
   const [loading, setLoading] = React.useState(!!window.UNNA_API_URL && !!UNNA._galleriaLoading);
   const [galleria, setGalleria] = React.useState(UNNA.galleria || []);
   const [activeTag, setActiveTag] = React.useState(null);
+  const [selected, setSelected] = React.useState(null);
 
   React.useEffect(() => {
     const handler = () => {
@@ -128,16 +150,10 @@ function GalleriaPage() {
 
       {!loading && allTags.length > 0 && (
         <div className="wrap gal-filters" role="group" aria-label="Filtra per tag">
-          <button
-            className={`gal-filter${!activeTag ? " gal-filter--active" : ""}`}
-            onClick={() => setActiveTag(null)}
-          >Tutte</button>
+          <button className={`gal-filter${!activeTag ? " gal-filter--active" : ""}`} onClick={() => setActiveTag(null)}>Tutte</button>
           {allTags.map(t => (
-            <button
-              key={t}
-              className={`gal-filter${activeTag === t ? " gal-filter--active" : ""}`}
-              onClick={() => setActiveTag(activeTag === t ? null : t)}
-            >{t}</button>
+            <button key={t} className={`gal-filter${activeTag === t ? " gal-filter--active" : ""}`}
+              onClick={() => setActiveTag(activeTag === t ? null : t)}>{t}</button>
           ))}
         </div>
       )}
@@ -151,7 +167,7 @@ function GalleriaPage() {
             ))
           : filtered.length === 0
           ? <p className="gal-empty gal-empty--page">Nessuna foto trovata.</p>
-          : filtered.map((f, i) => <GalleriaCard key={f.id || i} foto={f} />)
+          : filtered.map((f, i) => <GalleriaCard key={f.id || i} foto={f} onClick={() => setSelected(f)} />)
         }
       </main>
 
@@ -161,6 +177,8 @@ function GalleriaPage() {
           <a href="index.html">Torna alla home</a>
         </div>
       </footer>
+
+      {selected && <GalleriaLightbox foto={selected} onClose={() => setSelected(null)} />}
     </div>
   );
 }
