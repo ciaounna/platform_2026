@@ -61,7 +61,7 @@
 
 /* Sidebar */
 .ev-side { position: sticky; top: 90px; display: flex; flex-direction: column; gap: 16px; }
-.ev-card { background: var(--bianco); border-radius: var(--r-xl); padding: clamp(24px, 2.5vw, 34px); box-shadow: var(--shadow); }
+.ev-card { background: var(--bianco); border-radius: var(--r-xl); padding: clamp(24px, 2.5vw, 34px); }
 .ev-card__h { font-size: 1.5rem; margin-bottom: 8px; }
 .ev-info { margin: 0; }
 .ev-info__row { padding: 16px 0; border-bottom: 1px solid var(--grigio-150); }
@@ -112,7 +112,7 @@
 .tge-head__title em { font-style: normal; color: var(--arancio); }
 .tge-head__lead { color: var(--grigio-700); font-size: clamp(1.05rem, 2vw, 1.3rem); margin: 18px 0 0; max-width: 540px; text-wrap: pretty; }
 .tge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: clamp(16px, 2vw, 24px); padding-top: clamp(48px, 6vw, 72px); padding-bottom: clamp(48px, 6vw, 72px); }
-.tge-grid .evento-card { background: var(--bianco); }
+.tge-grid .evento-card { background: var(--crema); }
 
 /* Link "Tutti gli eventi" nella home */
 .tge-back { color: var(--inchiostro); margin-bottom: 28px; }
