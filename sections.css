@@ -308,8 +308,8 @@
 .manifesto__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(40px, 6vw, 90px); align-items: center; margin-top: clamp(40px, 6vw, 72px); }
 .manifesto__text p { font-size: clamp(1.1rem, 1.9vw, 1.4rem); line-height: 1.65; margin-bottom: 22px; color: color-mix(in srgb, var(--crema) 92%, transparent); text-wrap: pretty; }
 .manifesto__text strong { color: var(--viola); }
-.manifesto__cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--viola); padding: 12px 0; border-bottom: 2px solid var(--viola); transition: gap .3s; }
-.manifesto__cta:hover { gap: 16px; }
+.manifesto__cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; color: var(--viola); padding: 9px 18px; border-radius: var(--r-pill); border: 2px solid var(--viola); transition: gap .25s, background .25s, color .25s; }
+.manifesto__cta:hover { gap: 14px; background: var(--viola); color: var(--crema); }
 .manifesto__trina { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .trinacria { width: clamp(432px, 62vw, 672px); height: auto; }
 @keyframes spin { to { transform: rotate(360deg); } }
