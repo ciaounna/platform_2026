@@ -31,8 +31,9 @@ function EventoCard({ evento, featured, past = false }) {
 
 function Eventi({ loading = false }) {
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const upcoming = [...UNNA.eventi].filter(e => new Date(e.dataISO) >= today).sort((a, b) => new Date(a.dataISO) - new Date(b.dataISO));
-  const past     = [...UNNA.eventi].filter(e => new Date(e.dataISO) <  today).sort((a, b) => new Date(b.dataISO) - new Date(a.dataISO));
+  function isValidPast(e) { const d = new Date(e.dataISO); return !isNaN(d) && d < today; }
+  const upcoming = [...UNNA.eventi].filter(e => !isValidPast(e)).sort((a, b) => new Date(a.dataISO) - new Date(b.dataISO));
+  const past     = [...UNNA.eventi].filter(e =>  isValidPast(e)).sort((a, b) => new Date(b.dataISO) - new Date(a.dataISO));
   const eventi = [...upcoming, ...past].slice(0, 5);
   const [first, ...rest] = eventi;
   return (
@@ -57,10 +58,10 @@ Ogni tappa è un’esperienza che arricchisce: scopri dove e quando.
           </div>
         ) : (
           <div className="eventi-grid">
-            <Reveal as="div" className="eventi-grid__feat"><EventoCard evento={first} featured past={new Date(first.dataISO) < today} /></Reveal>
+            <Reveal as="div" className="eventi-grid__feat"><EventoCard evento={first} featured past={isValidPast(first)} /></Reveal>
             <div className="eventi-grid__rest">
               {rest.map((e, i) => (
-                <Reveal as="div" key={e.id} delay={80 * (i + 1)}><EventoCard evento={e} past={new Date(e.dataISO) < today} /></Reveal>
+                <Reveal as="div" key={e.id} delay={80 * (i + 1)}><EventoCard evento={e} past={isValidPast(e)} /></Reveal>
               ))}
             </div>
           </div>
