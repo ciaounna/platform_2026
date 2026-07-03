@@ -37,7 +37,7 @@ function Contatti() {
       {/* Titolo full-width */}
       <div className="wrap">
         <Reveal>
-          <h2 id="con-h" className="contatti__intro-title">Voglio partecipare</h2>
+          <h2 id="con-h" className="contatti__intro-title">Unisciti a noi</h2>
         </Reveal>
       </div>
 
@@ -84,7 +84,7 @@ function Contatti() {
               <button type="submit" className="btn btn-primary contatti__submit">
                 Iscrivimi all'onda <Icon name="arrowR" size={20} />
               </button>
-              <p className="contatti__priv">I tuoi dati saranno trattati nel rispetto del GDPR e usati solo per scriverti quando c'è qualcosa che conta: nuovi eventi, mappe e modi di fare la tua parte. E puoi cancellarti quando vuoi.</p>
+              <p className="contatti__priv">I tuoi dati saranno trattati nel rispetto del GDPR e usati solo per scriverti quando c'è qualcosa che conta davvero: nuovi eventi, mappe e modi di fare la tua parte. Promettiamo di non esagerare, e puoi cancellarti quando vuoi.</p>
             </form>
           )}
         </Reveal>
