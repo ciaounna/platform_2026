@@ -18,8 +18,8 @@
 
 .hero__inner { position: relative; z-index: 3; max-width: 1160px; display: grid; grid-template-columns: 1fr clamp(220px, 32vw, 420px); gap: clamp(40px, 5vw, 80px); align-items: center; }
 .hero__content { min-width: 0; }
-.hero__img-wrap { display: flex; align-items: center; justify-content: center; }
-.hero__img { width: 100%; display: block; }
+.hero__img-wrap { display: flex; align-items: center; justify-content: center; overflow: visible; }
+.hero__img { width: 200%; display: block; }
 
 .hero--chiaro .hero__inner { max-width: 1200px; }
 
