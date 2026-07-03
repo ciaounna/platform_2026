@@ -59,7 +59,7 @@ function EventoPage() {
   const ev = getEvento();
   if (!ev) return <NotFound />;
   const t = tinta(ev.tinta);
-  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`${ev.luogo}, Sicilia`);
+  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ev.luogo);
   const rootStyle = { "--ev-bg": t.bg, "--ev-fg": t.fg, "--ev-ink": t.ink, "--ev-soft": t.soft };
 
   return (
@@ -127,16 +127,19 @@ function EventoPage() {
               {ev.info.map((row, i) => (
                 <div className="ev-info__row" key={i}>
                   <dt>{row.k}</dt>
-                  <dd>{row.v}</dd>
+                  <dd>{formatData(row.v)}</dd>
                 </div>
               ))}
             </dl>
 
-            <a className="ev-map" href={mapsUrl} target="_blank" rel="noopener" aria-label={`Apri ${ev.luogo} su Google Maps`}>
-              <span className="ev-map__pin"><Icon name="pin" size={22} /></span>
-              <span className="ev-map__label">Maps <Icon name="arrow" size={15} /></span>
-            </a>
-            <a className="btn btn-primary ev-map__btn" href={mapsUrl} target="_blank" rel="noopener">Apri su Google Maps</a>
+            <div className="ev-map">
+              <iframe
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(ev.luogo)}&output=embed&z=14`}
+                loading="lazy"
+                title={`Mappa di ${ev.luogo}`}
+                allowFullScreen
+              />
+            </div>
           </div>
 
           <a className="ev-ig" href={UNNA.social.instagram} target="_blank" rel="noopener">
