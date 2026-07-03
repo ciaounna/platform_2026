@@ -121,6 +121,16 @@ function SkeletonCard({ featured = false }) {
 }
 window.SkeletonCard = SkeletonCard;
 
+// ---- Formattazione data ------------------------------------
+const _MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+function formatData(val) {
+  if (!val) return "";
+  const d = new Date(val);
+  if (isNaN(d)) return String(val);
+  return `${d.getDate()} ${_MESI[d.getMonth()]} ${d.getFullYear()}`;
+}
+window.formatData = formatData;
+
 // ---- Icone --------------------------------------------------
 function Icon({ name, size = 22, stroke = 2 }) {
   const common = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: stroke, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true };

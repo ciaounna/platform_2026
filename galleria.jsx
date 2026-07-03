@@ -1,18 +1,9 @@
-/* global React, ReactDOM, Icon, Reveal */
+/* global React, ReactDOM, Icon, Reveal, formatData */
 // ============================================================
 // unna — Galleria fotografica
 // ============================================================
 
 const GALLERIA_LIMIT = 5;
-
-const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
-function formatData(str) {
-  if (!str) return "";
-  const s = String(str).slice(0, 10);
-  const [y, m, d] = s.split("-");
-  if (!y || !m || !d) return str;
-  return `${parseInt(d)} ${MESI[parseInt(m) - 1]} ${y}`;
-}
 
 // Lightbox con navigazione frecce tra le foto
 function GalleriaLightbox({ fotos, index, onClose, onChange }) {
