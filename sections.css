@@ -18,10 +18,8 @@
 
 .hero__inner { position: relative; z-index: 3; max-width: 1160px; display: grid; grid-template-columns: 1fr clamp(220px, 32vw, 420px); gap: clamp(40px, 5vw, 80px); align-items: center; }
 .hero__content { min-width: 0; }
-.hero__img-wrap { display: grid; }
-.hero__img { grid-area: 1/1; width: 100%; display: block; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,0.28); }
-.hero__img--back { transform: rotate(-7deg); z-index: 0; align-self: center; }
-.hero__img--front { transform: rotate(5deg); z-index: 1; position: relative; }
+.hero__img-wrap { display: flex; align-items: center; justify-content: center; }
+.hero__img { width: 100%; display: block; }
 
 .hero--chiaro .hero__inner { max-width: 1200px; }
 

@@ -30,8 +30,7 @@ Riportiamo vita nei territori e trasformiamo ogni movimento in incontro
         </div>
 
         <div className="hero__img-wrap">
-          <img className="hero__img hero__img--back" src="assets/heroimg2.png" alt="" aria-hidden="true" />
-          <img className="hero__img hero__img--front" src="assets/heroimg.jpg" alt="" aria-hidden="true" />
+          <img className="hero__img" src="assets/hero.png" alt="" aria-hidden="true" />
         </div>
       </div>
 
