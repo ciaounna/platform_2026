@@ -61,7 +61,7 @@ function getEventi() {
       for (let n = 1; n <= 10; n++) {
         const k = (obj[`info${n}_etichetta`] || "").toString().trim();
         const v = (obj[`info${n}_valore`]    || "").toString().trim();
-        if (k && v) obj.info.push({ k, v });
+        if (k && v) obj.info.push({ k: sanitizeVal(k), v: sanitizeVal(v) });
         delete obj[`info${n}_etichetta`];
         delete obj[`info${n}_valore`];
       }
@@ -83,6 +83,11 @@ function getEventi() {
 
       return obj;
     });
+}
+
+function sanitizeVal(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, Session.getScriptTimeZone(), "dd/MM/yyyy");
+  return v;
 }
 
 function driveToImg(url) {
