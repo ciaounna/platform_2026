@@ -66,7 +66,7 @@
 @media (max-width: 760px) {
   .hero__inner { grid-template-columns: 1fr; }
   .hero__img-wrap { display: flex; justify-content: center; }
-  .hero__img { width: 66%; }
+  .hero__img { width: 79%; }
   .hero { padding-bottom: 60px; }
 }
 @media (max-width: 640px) { .hero__scroll { display: none; } }
