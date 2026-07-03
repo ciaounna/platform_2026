@@ -99,7 +99,7 @@ function getGalleria() {
       if (typeof obj.tags === "string") {
         obj.tags = obj.tags.split(",").map(t => t.trim()).filter(Boolean);
       }
-      if (obj.data instanceof Date) obj.data = obj.data.toISOString().slice(0, 10);
+      if (obj.data instanceof Date) obj.data = Utilities.formatDate(obj.data, Session.getScriptTimeZone(), "yyyy-MM-dd");
       if (obj.src) obj.src = driveToImg(obj.src);
       return obj;
     })

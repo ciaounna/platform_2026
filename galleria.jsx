@@ -5,6 +5,15 @@
 
 const GALLERIA_LIMIT = 5;
 
+const MESI = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+function formatData(str) {
+  if (!str) return "";
+  const s = String(str).slice(0, 10);
+  const [y, m, d] = s.split("-");
+  if (!y || !m || !d) return str;
+  return `${parseInt(d)} ${MESI[parseInt(m) - 1]} ${y}`;
+}
+
 // Lightbox con navigazione frecce tra le foto
 function GalleriaLightbox({ fotos, index, onClose, onChange }) {
   React.useEffect(() => {
@@ -51,7 +60,7 @@ function GalleriaLightbox({ fotos, index, onClose, onChange }) {
         <div className="gal-lb__body">
           <div className="gal-lb__meta">
             {foto.luogo && <span className="gal-lb__luogo"><Icon name="pin" size={13} /> {foto.luogo}</span>}
-            {foto.data && <span className="gal-lb__date">{foto.data}</span>}
+            {foto.data && <span className="gal-lb__date">{formatData(foto.data)}</span>}
           </div>
           {foto.descrizione && <p className="gal-lb__desc">{foto.descrizione}</p>}
           {foto.tags && foto.tags.length > 0 && (
