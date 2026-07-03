@@ -74,6 +74,13 @@ function getEventi() {
       delete obj.contatti_tel;
       delete obj.contatti_email;
 
+      // ── date: converti Date objects in stringhe YYYY-MM-DD
+      ["dataISO", "data", "dataBreve"].forEach(function(k) {
+        if (obj[k] instanceof Date) {
+          obj[k] = Utilities.formatDate(obj[k], Session.getScriptTimeZone(), "yyyy-MM-dd");
+        }
+      });
+
       return obj;
     });
 }
