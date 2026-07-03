@@ -1,4 +1,4 @@
-/* global React, ReactDOM, EventoMedia, Icon, tinta, formatData */
+/* global React, ReactDOM, EventoMedia, Icon, tinta */
 // ============================================================
 // unna — Pagina dettaglio EVENTO (?id=...)
 // Layout: contenuto a sinistra + sidebar "Informazioni" a destra
@@ -76,7 +76,7 @@ function EventoPage() {
         <article className="ev-main">
           <button className="ev-back ev-back--inline" onClick={() => history.back()}><span className="ev-back__ico" aria-hidden="true"><Icon name="arrowR" size={18} /></span> Torna indietro</button>
           <h1 className="ev-title">{ev.titolo}</h1>
-          <p className="ev-place"><Icon name="pin" size={18} /> {ev.luogo} · {ev.provincia} &nbsp;•&nbsp; <Icon name="calendar" size={17} /> {formatData(ev.data || ev.dataISO)}</p>
+          <p className="ev-place"><Icon name="pin" size={18} /> {ev.luogo} · {ev.provincia} &nbsp;•&nbsp; <Icon name="calendar" size={17} /> {ev.data}</p>
 
           <div className="ev-media"><EventoMedia evento={ev} /></div>
 
@@ -127,7 +127,7 @@ function EventoPage() {
               {ev.info.map((row, i) => (
                 <div className="ev-info__row" key={i}>
                   <dt>{row.k}</dt>
-                  <dd>{formatData(row.v)}</dd>
+                  <dd>{row.v}</dd>
                 </div>
               ))}
             </dl>
@@ -158,7 +158,7 @@ function EventoPage() {
               <a key={e.id} className="ev-altri__card" href={`evento.html?id=${e.id}`} style={{ "--ev-bg": et.bg, "--ev-fg": et.fg, "--ev-ink": et.ink }}>
                 <div className="ev-altri__media"><EventoMedia evento={e} label={false} /></div>
                 <div className="ev-altri__body">
-                  <span className="ev-altri__date">{formatData(e.dataISO || e.data)}</span>
+                  <span className="ev-altri__date">{e.data}</span>
                   <h3>{e.titolo}</h3>
                   <span className="ev-altri__place"><Icon name="pin" size={14} /> {e.luogo}</span>
                 </div>
