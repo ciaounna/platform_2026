@@ -4,14 +4,13 @@
 // Bento: una card in evidenza + griglia.
 // ============================================================
 
-function EventoCard({ evento, featured, past = false }) {
+function EventoCard({ evento, featured }) {
   const t = tinta(evento.tinta);
   return (
-    <a className={`evento-card ${featured ? "evento-card--big" : ""} ${past ? "evento-card--past" : ""}`} href={`evento.html?id=${evento.id}`}
+    <a className={`evento-card ${featured ? "evento-card--big" : ""}`} href={`evento.html?id=${evento.id}`}
        style={{ "--ev-bg": t.bg, "--ev-fg": t.fg, "--ev-ink": t.ink, "--ev-soft": t.soft }}>
       <div className="evento-card__media">
         <EventoMedia evento={evento} />
-        {past && <span className="evento-card__badge-past">Già avvenuto</span>}
         <span className="evento-card__date"><Icon name="calendar" size={15} /> {evento.dataBreve}</span>
       </div>
       <div className="evento-card__body">
@@ -30,11 +29,7 @@ function EventoCard({ evento, featured, past = false }) {
 }
 
 function Eventi({ loading = false }) {
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  function isValidPast(e) { const d = new Date(e.dataISO); return !isNaN(d) && d < today; }
-  const upcoming = [...UNNA.eventi].filter(e => !isValidPast(e)).sort((a, b) => new Date(a.dataISO) - new Date(b.dataISO));
-  const past     = [...UNNA.eventi].filter(e =>  isValidPast(e)).sort((a, b) => new Date(b.dataISO) - new Date(a.dataISO));
-  const eventi = [...upcoming, ...past].slice(0, 5);
+  const eventi = UNNA.eventi.slice(0, 5);
   const [first, ...rest] = eventi;
   return (
     <section className="section eventi-sec" id="eventi" aria-labelledby="eventi-h">
@@ -58,10 +53,10 @@ Ogni tappa è un’esperienza che arricchisce: scopri dove e quando.
           </div>
         ) : (
           <div className="eventi-grid">
-            <Reveal as="div" className="eventi-grid__feat"><EventoCard evento={first} featured past={isValidPast(first)} /></Reveal>
+            <Reveal as="div" className="eventi-grid__feat"><EventoCard evento={first} featured /></Reveal>
             <div className="eventi-grid__rest">
               {rest.map((e, i) => (
-                <Reveal as="div" key={e.id} delay={80 * (i + 1)}><EventoCard evento={e} past={isValidPast(e)} /></Reveal>
+                <Reveal as="div" key={e.id} delay={80 * (i + 1)}><EventoCard evento={e} /></Reveal>
               ))}
             </div>
           </div>

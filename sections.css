@@ -254,15 +254,6 @@
 .evento-card__tag { font-family: var(--font-display); font-weight: 600; font-size: 0.78rem; padding: 6px 13px; border-radius: var(--r-pill); background: var(--ev-soft); color: var(--ev-ink); }
 .evento-card__go { display: grid; place-items: center; width: 46px; height: 46px; flex: none; border-radius: 50%; background: var(--ev-bg); color: var(--ev-fg); transition: transform .4s var(--ease); }
 .evento-card:hover .evento-card__go { transform: rotate(45deg) scale(1.08); }
-.evento-card--past { opacity: 0.55; }
-.evento-card--past:hover { opacity: 0.75; }
-.evento-card__badge-past {
-  position: absolute; top: 12px; left: 12px;
-  font-family: var(--font-display); font-weight: 700; font-size: 0.72rem;
-  background: var(--inchiostro); color: var(--crema);
-  padding: 5px 11px; border-radius: var(--r-pill);
-  box-shadow: var(--shadow-sm); letter-spacing: 0.02em;
-}
 .evento-card--big .evento-card__media .evento-media { aspect-ratio: 16 / 10; }
 
 @media (max-width: 920px) {
@@ -320,8 +311,7 @@
 .manifesto__cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--viola); padding: 12px 0; border-bottom: 2px solid var(--viola); transition: gap .3s; }
 .manifesto__cta:hover { gap: 16px; }
 .manifesto__trina { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
-.trinacria { width: clamp(216px, 31vw, 336px); height: auto; transform-origin: center; animation: trinaRotate calc(40s / var(--motion)) linear infinite; }
-@keyframes trinaRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.trinacria { width: clamp(216px, 31vw, 336px); height: auto; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .manifesto__trina-cap { font-size: 0.98rem; color: var(--viola-100); max-width: 320px; line-height: 1.55; }
 

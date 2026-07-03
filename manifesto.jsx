@@ -34,7 +34,7 @@ function Manifesto() {
           </Reveal>
 
           <Reveal className="manifesto__trina" delay={200}>
-            <img className="trinacria" src="assets/trinacria.svg" alt="" aria-hidden="true" />
+            <img className="trinacria" src="assets/unnine.png" alt="" aria-hidden="true" />
           </Reveal>
         </div>
       </div>
