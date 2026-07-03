@@ -25,10 +25,8 @@ function Contatti() {
 
   const voci = [
     "Abiti un territorio che ti piacerebbe vedere più attivo, più vivo.",
-    "Ti interessano i processi rigenerativi che partono dal basso — ma veramente basso, bassissimo sottoterra.",
     "Attraversi i territori e vorresti conoscere la comunità e lasciare un impatto positivo.",
-    "Condividi i nostri valori e hai qualcosa da dire.",
-    "Condividi i nostri valori e ti piace ascoltare.",
+    "Condividi i nostri valori.",
     "Lavori nel turismo e cerchi un modello che abbia senso.",
     "Vorresti mettere le tue passioni e le tue competenze a favore della comunità: ti piace disegnare? Ricamare? Girare video? Faccelo sapere.",
   ];
