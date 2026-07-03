@@ -311,7 +311,7 @@
 .manifesto__cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--viola); padding: 12px 0; border-bottom: 2px solid var(--viola); transition: gap .3s; }
 .manifesto__cta:hover { gap: 16px; }
 .manifesto__trina { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
-.trinacria { width: clamp(216px, 31vw, 336px); height: auto; }
+.trinacria { width: clamp(432px, 62vw, 672px); height: auto; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .manifesto__trina-cap { font-size: 0.98rem; color: var(--viola-100); max-width: 320px; line-height: 1.55; }
 
