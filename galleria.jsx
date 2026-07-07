@@ -188,7 +188,10 @@ function GalleriaPage() {
       <footer className="ev-foot">
         <div className="wrap ev-foot__inner">
           <span className="footer__logo">unna</span>
-          <a href="index.html">Torna alla home</a>
+          <div style={{ display: "flex", gap: "20px" }}>
+            <a href="https://www.linkedin.com/company/unnacity/?viewAsMember=true" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="index.html">Torna alla home</a>
+          </div>
         </div>
       </footer>
 

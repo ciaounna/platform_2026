@@ -100,6 +100,7 @@ function Footer() {
           <div>
             <h4>Contatti</h4>
             <a href={UNNA.social.instagram} target="_blank" rel="noopener">{UNNA.social.instagramHandle}</a>
+            <a href="https://www.linkedin.com/company/unnacity/?viewAsMember=true" target="_blank" rel="noopener">LinkedIn</a>
             <a href={`mailto:${UNNA.social.email}`}>{UNNA.social.email}</a>
           </div>
         </div>
