@@ -28,7 +28,7 @@ window.UNNA = {
       foto: "assets/team-paola.jpg",
       nome: "Paola Di Dio",
       ruolo: "Destination & Community Manager",
-      bio: "Ha un legame profondo con il territorio e le tradizioni mediterranee. Formata in lingue, hospitality e turismo responsabile. Professionista del destination management e dell'ospitalità rigenerativa, progetta esperienze di accoglienza autentiche che uniscono persone, luoghi e cultura, valorizzando saperi locali e patrimoni immateriali.",
+      bio: "Ha un legame profondo con il territorio e le tradizioni mediterranee. Formata in lingue, hospitality e turismo responsabile, progetta esperienze di accoglienza autentiche che uniscono persone, luoghi e cultura, valorizzando saperi locali e patrimoni immateriali.",
       parola: "muovere",
       tinta: "arancio",
       linkedin: "https://www.linkedin.com/in/paola-di-dio-7362a82aa/",
