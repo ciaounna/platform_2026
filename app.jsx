@@ -38,7 +38,6 @@ function App() {
 
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
 
-  // Scroll rapido all'hash (800ms, feel immediato)
   useEffectA(() => {
     const hash = window.location.hash;
     if (!hash) return;
@@ -50,20 +49,6 @@ function App() {
     }, 800);
     return () => clearTimeout(t);
   }, []);
-
-  // Correzione silenziosa dopo caricamento API: snap istantaneo solo se ancora vicini al target
-  useEffectA(() => {
-    if (eventiLoading || galleriaLoading) return;
-    const hash = window.location.hash;
-    if (!hash) return;
-    const el = document.querySelector(hash);
-    if (!el) return;
-    const navH = document.querySelector(".nav") ? document.querySelector(".nav").offsetHeight : 70;
-    const target = el.offsetTop - navH;
-    if (Math.abs(window.scrollY - target) < 500) {
-      window.scrollTo(0, target);
-    }
-  }, [eventiLoading, galleriaLoading]);
 
   useEffectA(() => {
     const root = document.documentElement;
