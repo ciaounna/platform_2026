@@ -40,15 +40,15 @@ function App() {
 
   useEffectA(() => {
     const hash = window.location.hash;
-    if (!hash) return;
+    if (!hash || eventiLoading || galleriaLoading) return;
     const t = setTimeout(() => {
       const el = document.querySelector(hash);
       if (!el) return;
       const navH = document.querySelector(".nav") ? document.querySelector(".nav").offsetHeight : 70;
       window.scrollTo({ top: el.offsetTop - navH, behavior: "smooth" });
-    }, 800);
+    }, 120);
     return () => clearTimeout(t);
-  }, []);
+  }, [eventiLoading, galleriaLoading]);
 
   useEffectA(() => {
     const root = document.documentElement;
