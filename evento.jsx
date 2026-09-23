@@ -106,7 +106,7 @@ function EventoPage() {
           {/* Disclaimer unna */}
           <div className="ev-disclaimer">
             <p>Ogni evento sarà accompagnato da un momento dedicato alla conoscenza reciproca, alla socialità e allo scambio di idee. Attraverso attività partecipative e conversazioni aperte, i/le partecipanti potranno conoscere il progetto unna, condividere esigenze e aspirazioni per il territorio e contribuire a immaginare insieme una comunità più attiva, inclusiva e sostenibile.</p>
-            <a href={`mailto:${ev.contatti.email || "unna.city@gmail.com"}`} className="ev-disclaimer__cta">Contattaci per riservare il tuo posto o chiedere ulteriori informazioni →</a>
+            <a href={`mailto:${ev.contatti.email || "ciaounna@gmail.com"}`} className="ev-disclaimer__cta">Contattaci per riservare il tuo posto o chiedere ulteriori informazioni →</a>
           </div>
 
           {/* Contatti */}
